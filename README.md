@@ -33,10 +33,16 @@ This project is a proxy server that facilitates communication between WhatsApp a
 
 3. Create a `.env` file in the root directory and add the following environment variables:
    ```env
-   WHATSAPP_VERIFY_TOKEN=<your-whatsapp-verify-token>
-   AI_CHATBOT_ID=<your-ai-chatbot-id>
+   
+   SENDBIRD_API_TOKEN=<your-sendbird-api-token-from-sendbird-dashboard-settings>
+   SENDBIRD_APP_ID=<your-sendbird-app-id-from-sendbird-dashboard-settings>
+   VERIFY_TOKEN=<your-whatsapp-webhook-verify-token>
    WHATSAPP_AUTH_TOKEN=<your-whatsapp-auth-token>
    WHATSAPP_PHONE_ID=<your-whatsapp-phone-id>
+   ENCRYPTION_KEY=<genetate-a-random-encryption-key-see-encrytion.js>
+   IV=<genetate-a-random-IV-key-see-encrytion.js>
+   AI_CHATBOT_ID=<your-ai-chatbot-user-id-from-sendbird-dashboard-bot-studio>
+   
    ```
 
 ## Usage

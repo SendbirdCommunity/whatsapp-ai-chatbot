@@ -1,5 +1,4 @@
 const axiosInstance = require('../config/axiosInstance'); // Import the configured axios instance
-const { encrypt } = require('./encryption'); // Import the encrypt function from the encryption module
 
 // Check if a User Exists
 async function checkUserExists(userId) {
@@ -52,3 +51,4 @@ module.exports = {
     createChannel,
     sendMessage,
 }; // Export the functions for use in other modules
+

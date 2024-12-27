@@ -1,5 +1,21 @@
 const CryptoJS = require("crypto-js"); // Import the crypto-js library for encryption and decryption
 
+// Function to generate a random string of a given length
+function generateRandomString(length) {
+    return CryptoJS.lib.WordArray.random(length).toString(CryptoJS.enc.Hex);
+}
+
+// Generate a 32-byte (256-bit) encryption key
+// const ENCRYPTION_KEY = generateRandomString(32);
+
+// Generate a 16-byte (128-bit) IV
+// const IV = generateRandomString(16);
+
+// console.log("Generated Encryption Key:", ENCRYPTION_KEY);
+// console.log("Generated IV:", IV);
+
+
+
 // Retrieve encryption key and IV from environment variables
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Must be 32 characters (256 bits)
 const IV = process.env.IV; // Must be 16 characters (128 bits)
@@ -7,22 +23,6 @@ const IV = process.env.IV; // Must be 16 characters (128 bits)
 // Parse encryption key and IV to Hex format
 const key = CryptoJS.enc.Hex.parse(ENCRYPTION_KEY);
 const iv = CryptoJS.enc.Hex.parse(IV);
-
-// Function to encrypt a given text
-function encrypt(text) {
-    const encrypted = CryptoJS.AES.encrypt(text, key, { iv: iv }); // Encrypt the text using AES encryption
-    return toUrlSafeBase64(encrypted.toString()); // Convert the encrypted text to URL-safe Base64 format
-}
-
-// Function to decrypt a given URL-safe Base64 encrypted text
-function decrypt(urlSafeEncryptedText) {
-    const base64EncryptedText = fromUrlSafeBase64(urlSafeEncryptedText); // Convert URL-safe Base64 to standard Base64
-    const decrypted = CryptoJS.AES.decrypt(base64EncryptedText, key, { iv: iv }); // Decrypt the text using AES decryption
-    return decrypted.toString(CryptoJS.enc.Utf8); // Convert the decrypted text to UTF-8 string
-}
-
-// Export the encrypt and decrypt functions
-module.exports = { encrypt, decrypt };
 
 // Utility function to convert Base64 string to URL-safe Base64 format
 function toUrlSafeBase64(base64String) {
@@ -37,3 +37,21 @@ function fromUrlSafeBase64(urlSafeBase64) {
     }
     return base64String;
 }
+
+// Function to encrypt a given text
+function encrypt(text) {
+    const encrypted = CryptoJS.AES.encrypt(text, key, { iv: iv }); // Encrypt the text using AES encryption
+    return toUrlSafeBase64(encrypted.toString()); // Convert the encrypted text to URL-safe Base64 format
+}
+
+// Function to decrypt a given URL-safe Base64 encrypted text
+function decrypt(urlSafeEncryptedText) {
+    const base64EncryptedText = fromUrlSafeBase64(urlSafeEncryptedText); // Convert URL-safe Base64 to standard Base64
+    const decrypted = CryptoJS.AES.decrypt(base64EncryptedText, key, { iv: iv }); // Decrypt the text using AES decryption
+    return decrypted.toString(CryptoJS.enc.Utf8); // Convert the decrypted text to UTF-8 string
+}
+
+
+
+// Export the encrypt and decrypt functions
+module.exports = { encrypt, decrypt };
